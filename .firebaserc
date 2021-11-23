@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "redux-angular02": {
+      "hosting": {
+        "angular02": [
+          "redux-angular02"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "redux-angular02"
+  }
+}

@@ -104,6 +104,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "angular02:build:production",
+            "firebaseProject": "redux-angular02",
+            "firebaseHostingSite": "redux-angular02"
+          }
         }
       }
     }
