@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import 'firebase/firestore';
 import { map } from 'rxjs/operators';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private _auth: AngularFireAuth) { }
+  constructor(private _auth: AngularFireAuth, private _fireStore: AngularFirestore) { }
 
 
   initAuthListener() {
@@ -20,7 +23,15 @@ export class AuthService {
 
 
   createUser(nombre: string, email: string, password: string) {
-    return this._auth.createUserWithEmailAndPassword(email, password);
+    return this._auth.createUserWithEmailAndPassword(email, password)
+    .then(({user})=> {
+
+      const newUser = new User(user?.uid, nombre, user?.email);
+
+      this._fireStore.doc(`${user?.uid}/usuario`)
+        .set({ ...newUser });
+
+    });
   }
 
   loginUser( email: string, password: string) {
