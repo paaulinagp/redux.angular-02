@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private _authService: AuthService, 
     private _fb: FormBuilder, 
-    private _router: Router
+    private _router: Router,
+    private _toastr: ToastrService
   ) {
     this.formGroup = this._fb.group({
       email: ['', [Validators.required, Validators.email ]],
@@ -38,7 +40,7 @@ export class LoginComponent implements OnInit {
       console.log(credentials);
       this._router.navigate(['/dashboard']);
     })
-    .catch((error) => console.log(error));
+    .catch((error) => this._toastr.error(error.message, 'ERROR:'));
     
   }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private _fb: FormBuilder, 
     private _router: Router, 
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _toastr: ToastrService
   ) {
     this.formGroup = this._fb.group({
       nombre: ['', Validators.required],
@@ -39,7 +41,7 @@ export class RegisterComponent implements OnInit {
       console.log(credentials);
       this._router.navigate(['/dashboard']);
     })
-    .catch((error) => console.log(error));
+    .catch((error) => this._toastr.error(error.message, 'ERROR:'));
     
   }
 
