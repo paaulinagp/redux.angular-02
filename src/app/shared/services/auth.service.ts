@@ -15,12 +15,15 @@ export class AuthService {
 
   userSubscription: Subscription;
 
+  private _user: User | null;
+
   constructor(
     private _auth: AngularFireAuth, 
     private _fireStore: AngularFirestore,
     private _store: Store
   ) {
     this.userSubscription = new Subscription();
+    this._user = null;
   }
 
 
@@ -30,10 +33,12 @@ export class AuthService {
         this.userSubscription = this._fireStore.doc(`${fuser.uid}/usuario`).valueChanges()
         .subscribe((firestoreUser: any) => {
           const user = User.fromFirebase(firestoreUser);
+          this._user = user;
           this._store.dispatch(authActions.setUser({ user }));
         })
       }
       else {
+        this._user = null;
         this._store.dispatch(authActions.unSetUser());
         this.userSubscription.unsubscribe();
       }
@@ -65,5 +70,10 @@ export class AuthService {
     return this._auth.authState.pipe(
       map( (fuser) => fuser != null )
     );
+  }
+
+
+  get user() {
+    return this._user;
   }
 }
