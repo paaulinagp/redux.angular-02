@@ -27,6 +27,11 @@ export class EstadisticaComponent implements OnInit {
 
 
   createEstadistics(items: IngresoEgreso[]) {
+    this.totalIngresos = 0;
+    this.totalEgresos = 0;
+    this.ingresos = 0;
+    this.egresos = 0;
+    
     items.forEach( item => {
       if(item.type === 'ingreso'){
         this.totalIngresos += item.amount;
