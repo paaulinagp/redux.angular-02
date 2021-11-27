@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import * as authActions from '../../auth/auth.actions';
 import { Subscription } from 'rxjs';
+import * as ieActions from '../../pages/dashboard/ingreso-egreso/ingreso-egreso.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,7 @@ export class AuthService {
       else {
         this._user = null;
         this._store.dispatch(authActions.unSetUser());
+        this._store.dispatch(ieActions.unSetItems());
         this.userSubscription.unsubscribe();
       }
     });

@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { filter, switchMap } from 'rxjs/operators';
 import { IngresoEgresoService } from '../../shared/services/ingreso-egreso.service';
 import { AppState } from '../../app.reducer';
+import * as actionsIE from './ingreso-egreso/ingreso-egreso.actions'
 
 @Component({
   selector: 'app-dashboard',
@@ -21,10 +22,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscriptions = this._strore.select('auth')
     .pipe(
-      filter(({user}) => !!user )
+      filter(({user}) => !!user ),
+      switchMap(({user}) => this._ingresoEgresoService.initIngresosEgresosListener(user?.uid))
     )
-    .subscribe(({user}) => {
-      this._ingresoEgresoService.initIngresosEgresosListener(user?.uid);
+    .subscribe((ingresosEgresos) => {
+      this._strore.dispatch(actionsIE.setItems({ items: ingresosEgresos }))
     });
   }
 

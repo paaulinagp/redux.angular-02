@@ -4,6 +4,6 @@ import { IngresoEgreso } from '../../../shared/models/ingreso-egreso.model';
 export const unSetItems = createAction('[IngresoEgreso] Un Set Items');
 
 export const setItems = createAction(
-  '[IngresoEgreso] Un Set Items',
+  '[IngresoEgreso] Set Items',
   props<{items: IngresoEgreso[]}>()
 );

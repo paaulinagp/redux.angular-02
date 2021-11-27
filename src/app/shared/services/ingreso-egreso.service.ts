@@ -25,13 +25,16 @@ export class IngresoEgresoService {
   }
 
   initIngresosEgresosListener( uid?: string ){
-    this._firestore.collection(`${uid}/ingresos-egresos/items`)
+    return this._firestore.collection(`${uid}/ingresos-egresos/items`)
     .snapshotChanges()
     .pipe(
       map((snapshot) => snapshot.map( doc => ({uid: doc.payload.doc.id, ...doc.payload.doc.data() as any } )))
     )
-    .subscribe((data) => {
-      console.log(data);
-    });
+  }
+
+  deleteItem(uidItem?: string ) {
+    const uid = this._authService.user?.uid;
+    return this._firestore.doc(`${uid}/ingresos-egresos/items/${uidItem}`).delete();
+
   }
 }
