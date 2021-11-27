@@ -18,6 +18,8 @@ export class IngresoEgresoService {
   create(ingresoEgreso: IngresoEgreso) {
     const uid = this._authService.user?.uid;
 
+    delete ingresoEgreso.uid; 
+    
     return this._firestore
       .doc(`${uid}/ingresos-egresos`)
       .collection('items')

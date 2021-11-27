@@ -46,7 +46,7 @@ export class IngresoEgresoComponent implements OnInit {
     this._ingresoEgresoService.create(data)
     .then(() => { 
       this._store.dispatch(uiActions.hideLoading());
-      this._toastr.success('Registro exitoso', 'ERROR:');
+      this._toastr.success('Registro exitoso');
       this.formGroup.reset();
     })
     .catch((error)=> {
