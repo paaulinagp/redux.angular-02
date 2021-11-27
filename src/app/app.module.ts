@@ -24,6 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { appReducers } from './app.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { OrderPipe } from './shared/pipes/order.pipe';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     DetalleComponent,
     FooterComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    OrderPipe
   ],
   imports: [
     BrowserModule,
