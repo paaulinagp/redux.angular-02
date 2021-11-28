@@ -11,8 +11,10 @@ import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
+
+// Modulos
+import { AuthModule } from './auth/auth.module';
+
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { IngresoEgresoComponent } from './pages/dashboard/ingreso-egreso/ingreso-egreso.component';
 import { EstadisticaComponent } from './pages/dashboard/estadistica/estadistica.component';
@@ -29,8 +31,6 @@ import { OrderPipe } from './shared/pipes/order.pipe';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
     DashboardComponent,
     IngresoEgresoComponent,
     EstadisticaComponent,
@@ -54,7 +54,8 @@ import { OrderPipe } from './shared/pipes/order.pipe';
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production
-    })
+    }),
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent],
