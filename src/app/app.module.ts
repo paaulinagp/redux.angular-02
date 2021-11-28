@@ -44,8 +44,7 @@ import { DashboardModule } from './pages/dashboard/dashboard.module';
       maxAge: 25,
       logOnly: environment.production
     }),
-    AuthModule,
-    DashboardModule
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent],

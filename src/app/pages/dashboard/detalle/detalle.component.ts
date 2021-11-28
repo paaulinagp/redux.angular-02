@@ -2,10 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { IngresoEgreso } from '../../../shared/models/ingreso-egreso.model';
-import { AppState } from '../../../app.reducer';
 import { IngresoEgresoService } from '../../../shared/services/ingreso-egreso.service';
 import * as uiActions from '../../../shared/ui.actions';
 import { ToastrService } from 'ngx-toastr';
+import { AppStateWithIngresoEgreso } from '../ingreso-egreso/ingreso-egresos.reducer';
 
 @Component({
   selector: 'app-detalle',
@@ -18,7 +18,7 @@ export class DetalleComponent implements OnInit, OnDestroy {
   items: IngresoEgreso[] = [];
 
   constructor(
-    private _store: Store<AppState>,
+    private _store: Store<AppStateWithIngresoEgreso>,
     private _ingresoEgresoService: IngresoEgresoService,
     private _toastr: ToastrService,
   ) {
