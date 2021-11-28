@@ -14,31 +14,20 @@ import { AppComponent } from './app.component';
 
 // Modulos
 import { AuthModule } from './auth/auth.module';
+import { SharedModule } from './shared/shared.module';
 
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { IngresoEgresoComponent } from './pages/dashboard/ingreso-egreso/ingreso-egreso.component';
-import { EstadisticaComponent } from './pages/dashboard/estadistica/estadistica.component';
-import { DetalleComponent } from './pages/dashboard/detalle/detalle.component';
-import { FooterComponent } from './shared/components/footer/footer.component';
-import { NavbarComponent } from './shared/components/navbar/navbar.component';
-import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
+
+
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { appReducers } from './app.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { OrderPipe } from './shared/pipes/order.pipe';
+
+import { DashboardModule } from './pages/dashboard/dashboard.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
-    IngresoEgresoComponent,
-    EstadisticaComponent,
-    DetalleComponent,
-    FooterComponent,
-    NavbarComponent,
-    SidebarComponent,
-    OrderPipe
   ],
   imports: [
     BrowserModule,
@@ -55,7 +44,8 @@ import { OrderPipe } from './shared/pipes/order.pipe';
       maxAge: 25,
       logOnly: environment.production
     }),
-    AuthModule
+    AuthModule,
+    DashboardModule
   ],
   providers: [],
   bootstrap: [AppComponent],
